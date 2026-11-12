@@ -76,4 +76,5 @@ does not push either branch. Running it again with unchanged sources is a safe
 no-op. The hourly/manual GitHub Actions workflow rebuilds the bundle; the Docker
 workflow publishes the pinned bundle as a GHCR image. It also listens for a
 successful bundle workflow run because GitHub suppresses push-triggered
-workflows for commits made with the default `GITHUB_TOKEN`.
+workflows for commits made with the default `GITHUB_TOKEN`; on scheduled
+no-op rebuilds it skips the image build unless the bundle gitlink changed.

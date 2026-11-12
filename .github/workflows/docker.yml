@@ -30,17 +30,37 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+      - name: Check for a new bundle release
+        id: release
+        env:
+          WORKFLOW_EVENT: ${{ github.event_name }}
+          BUNDLE_WORKFLOW_BASE: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          if [ "$WORKFLOW_EVENT" != "workflow_run" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git fetch origin main
+          if git diff --quiet "$BUNDLE_WORKFLOW_BASE" origin/main -- bundle; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
       - name: Normalize image name
+        if: steps.release.outputs.changed == 'true'
         run: echo "IMAGE_NAME=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_ENV"
       - name: Log in to GitHub Container Registry
+        if: steps.release.outputs.changed == 'true'
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Set up Docker Buildx
+        if: steps.release.outputs.changed == 'true'
         uses: docker/setup-buildx-action@v3
       - name: Generate image tags
+        if: steps.release.outputs.changed == 'true'
         id: meta
         uses: docker/metadata-action@v5
         with:
@@ -49,6 +69,7 @@ jobs:
             type=raw,value=latest
             type=sha,format=short
       - name: Build and push
+        if: steps.release.outputs.changed == 'true'
         uses: docker/build-push-action@v6
         with:
           context: ./bundle
