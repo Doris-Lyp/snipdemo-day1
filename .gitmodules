@@ -1,0 +1,12 @@
+[submodule "backend"]
+	path = backend
+	url = https://github.com/Doris-Lyp/snipdemo-day1
+	branch = backend
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/Doris-Lyp/snipdemo-day1
+	branch = frontend
+[submodule "cli"]
+	path = cli
+	url = https://github.com/Doris-Lyp/snipdemo-day1
+	branch = cli
