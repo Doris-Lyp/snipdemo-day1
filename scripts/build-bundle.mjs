@@ -32,7 +32,7 @@ function git(args, cwd = root, options = {}) {
     cwd,
     encoding: "utf8",
     stdio: options.capture ? ["ignore", "pipe", "inherit"] : "inherit",
-    shell: process.platform === "win32",
+    shell: false,
   });
   if (result.error) throw result.error;
   if (result.status !== 0) {
@@ -51,7 +51,7 @@ function hasStagedChanges(cwd) {
   const result = spawnSync("git", ["diff", "--cached", "--quiet"], {
     cwd,
     stdio: "ignore",
-    shell: process.platform === "win32",
+    shell: false,
   });
   if (result.error) throw result.error;
   if (result.status === 0) return false;
