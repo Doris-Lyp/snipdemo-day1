@@ -74,4 +74,6 @@ The script updates source submodules, builds the frontend, assembles and commits
 the bundle, then updates the bundle pointer on `main`. Without `--push`, it
 does not push either branch. Running it again with unchanged sources is a safe
 no-op. The hourly/manual GitHub Actions workflow rebuilds the bundle; the Docker
-workflow publishes the pinned bundle as a GHCR image.
+workflow publishes the pinned bundle as a GHCR image. It also listens for a
+successful bundle workflow run because GitHub suppresses push-triggered
+workflows for commits made with the default `GITHUB_TOKEN`.
