@@ -1,0 +1,4 @@
+.git
+.gitmodules
+node_modules
+*.log
