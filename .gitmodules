@@ -10,3 +10,7 @@
 	path = cli
 	url = https://github.com/Doris-Lyp/snipdemo-day1
 	branch = cli
+[submodule "bundle"]
+	path = bundle
+	url = https://github.com/Doris-Lyp/snipdemo-day1
+	branch = bundle
