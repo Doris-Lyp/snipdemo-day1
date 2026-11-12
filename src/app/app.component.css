@@ -1,0 +1,32 @@
+:host { display: block; }
+main { max-width: 960px; margin: auto; padding: 64px 24px; }
+header { margin-bottom: 36px; }
+h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); line-height: 1.1; letter-spacing: -.04em; margin: 16px 0; }
+h2 { font-size: 1.2rem; margin: 0 0 20px; }
+.eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .12em; color: #355d50; }
+.card { background: white; border: 1px solid #d6dfd9; border-radius: 20px; padding: 28px; margin-bottom: 24px; }
+label { display: block; font-weight: 600; margin-bottom: 10px; }
+.input-row, .section-heading { display: flex; gap: 12px; align-items: center; }
+.section-heading { justify-content: space-between; margin-bottom: 16px; }
+.section-heading h2 { margin: 0; }
+input { flex: 1; min-width: 0; border: 1px solid #718479; border-radius: 10px; padding: 14px; font: inherit; }
+button { font: inherit; font-weight: 600; border: 1px solid #234e3d; border-radius: 10px; padding: 14px 18px; background: #234e3d; color: white; cursor: pointer; }
+.secondary { background: white; color: #234e3d; padding: 10px 14px; }
+button:disabled { opacity: .65; cursor: wait; }
+a { color: #17513b; text-underline-offset: 3px; }
+:is(a, button, input, .table-scroll):focus-visible { outline: 3px solid #935c12; outline-offset: 4px; }
+.muted { color: #52645b; font-size: .9rem; }
+.error { color: #a12121; }
+.success { background: #edf7ee; padding: 16px; border-radius: 10px; overflow-wrap: anywhere; }
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th, td { padding: 16px 12px; border-bottom: 1px solid #d6dfd9; vertical-align: top; }
+th { font-size: .85rem; color: #52645b; }
+.original { overflow-wrap: anywhere; min-width: 180px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+@media (max-width: 600px) {
+  main { padding: 36px 16px; }
+  .card { padding: 20px; }
+  .input-row { flex-direction: column; align-items: stretch; }
+  .section-heading { flex-wrap: wrap; }
+}
