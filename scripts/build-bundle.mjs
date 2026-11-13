@@ -104,7 +104,9 @@ if (isDirty(bundleDir)) {
 run("git", ["submodule", "update", "--init", "--remote", "backend", "frontend", "cli"]);
 
 const npm = process.platform === "win32" ? "npm.cmd" : "npm";
-run(npm, ["install"], frontendDir);
+run(npm, ["ci"], frontendDir);
+run(npm, ["audit", "--audit-level=moderate"], frontendDir);
+run(npm, ["test", "--", "--watch=false", "--browsers=ChromeHeadless"], frontendDir);
 run(npm, ["run", "build"], frontendDir);
 if (!fs.existsSync(path.join(frontendBuildDir, "index.html"))) {
   throw new Error(`Angular build output is missing: ${path.join(frontendBuildDir, "index.html")}`);

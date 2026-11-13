@@ -1,6 +1,15 @@
 name: Build bundle
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - backend
+      - frontend
+      - cli
+      - scripts/build-bundle.mjs
+      - .github/workflows/bundle.yml
   schedule:
     - cron: "0 * * * *"
   workflow_dispatch:
@@ -26,6 +35,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-      # No push trigger: this workflow exists only on main, so pushes to source branches cannot start it.
+      # Only main pushes trigger this workflow; component branch pushes do not.
       - name: Rebuild and push bundle
         run: node scripts/build-bundle.mjs --push
